@@ -1,0 +1,27 @@
+---
+abstract: 'Client library for Hadoop WebHDFS and HttpFs, with Kerberos support'
+author:
+  - 'David Morel <david.morel@amakuru.net>'
+build_requires:
+  File::Basename: '0'
+  File::Temp: '0'
+  Test::Deep: '0'
+  Test::More: '0'
+configure_requires:
+  ExtUtils::MakeMaker: '0'
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142060'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: Net-Hadoop-WebHDFS-LWP
+requires:
+  Carp: '0'
+  Data::Dumper: '0'
+  LWP::UserAgent: '0'
+  Net::Hadoop::WebHDFS: '0'
+  parent: '0'
+  strict: '0'
+  warnings: '0'
+version: '0.001'
