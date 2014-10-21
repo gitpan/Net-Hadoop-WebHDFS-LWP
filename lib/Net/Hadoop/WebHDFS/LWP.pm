@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent 'Net::Hadoop::WebHDFS';
 
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 use LWP::UserAgent;
 use Carp;
@@ -135,7 +135,7 @@ Net::Hadoop::WebHDFS::LWP - Client library for Hadoop WebHDFS and HttpFs, with K
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 

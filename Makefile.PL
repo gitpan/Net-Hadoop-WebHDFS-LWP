@@ -29,12 +29,15 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
+    "ExtUtils::MakeMaker" => 0,
     "File::Basename" => 0,
     "File::Temp" => 0,
+    "HTTP::Message" => 0,
     "Test::Deep" => 0,
-    "Test::More" => 0
+    "Test::More" => 0,
+    "libwww" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -44,12 +47,15 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "Carp" => 0,
   "Data::Dumper" => 0,
+  "ExtUtils::MakeMaker" => 0,
   "File::Basename" => 0,
   "File::Temp" => 0,
+  "HTTP::Message" => 0,
   "LWP::UserAgent" => 0,
   "Net::Hadoop::WebHDFS" => 0,
   "Test::Deep" => 0,
   "Test::More" => 0,
+  "libwww" => 0,
   "parent" => 0,
   "strict" => 0,
   "warnings" => 0
