@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent 'Net::Hadoop::WebHDFS';
 
-our $VERSION = '0.004'; # VERSION
+our $VERSION = '0.005'; # VERSION
 
 use LWP::UserAgent;
 use Carp;
@@ -56,22 +56,20 @@ sub request {
 
     my $req;
 
-    if ( length $payload ) {
-        if ( openhandle($payload) ) {
-            $req = HTTP::Request::StreamingUpload->new(
-                $method => $uri,
-                fh      => $payload,
-                headers    => HTTP::Headers->new( 'Content-Length' => -s $payload, ),
-                chunk_size => $self->{chunksize},
-            );
-        }
-        elsif ( ref $payload ) {
-            croak __PACKAGE__ . " does not accept refs as content, only scalars and FH";
-        }
-        else {
-            $req = HTTP::Request->new( $method => $uri );
-            $req->content($payload);
-        }
+    if ( $payload && openhandle($payload) ) {
+        $req = HTTP::Request::StreamingUpload->new(
+            $method => $uri,
+            fh      => $payload,
+            headers    => HTTP::Headers->new( 'Content-Length' => -s $payload, ),
+            chunk_size => $self->{chunksize},
+        );
+    }
+    elsif ( ref $payload ) {
+        croak __PACKAGE__ . " does not accept refs as content, only scalars and FH";
+    }
+    else {
+        $req = HTTP::Request->new( $method => $uri );
+        $req->content($payload);
     }
 
     while ( my ( $h_field, $h_value ) = splice( $header || [], 0, 2 ) ) {
@@ -158,7 +156,7 @@ Net::Hadoop::WebHDFS::LWP - Client library for Hadoop WebHDFS and HttpFs, with K
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 
