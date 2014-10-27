@@ -22,10 +22,11 @@ name: Net-Hadoop-WebHDFS-LWP
 requires:
   Carp: '0'
   Data::Dumper: '0'
+  HTTP::Request::StreamingUpload: '0'
   LWP::UserAgent: '0'
   Net::Hadoop::WebHDFS: '0'
   Scalar::Util: '0'
   parent: '0'
   strict: '0'
   warnings: '0'
-version: '0.003'
+version: '0.004'

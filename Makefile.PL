@@ -22,6 +22,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Carp" => 0,
     "Data::Dumper" => 0,
+    "HTTP::Request::StreamingUpload" => 0,
     "LWP::UserAgent" => 0,
     "Net::Hadoop::WebHDFS" => 0,
     "Scalar::Util" => 0,
@@ -38,7 +39,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "libwww" => 0
   },
-  "VERSION" => "0.003",
+  "VERSION" => "0.004",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -52,6 +53,7 @@ my %FallbackPrereqs = (
   "File::Basename" => 0,
   "File::Temp" => 0,
   "HTTP::Message" => 0,
+  "HTTP::Request::StreamingUpload" => 0,
   "LWP::UserAgent" => 0,
   "Net::Hadoop::WebHDFS" => 0,
   "Scalar::Util" => 0,
