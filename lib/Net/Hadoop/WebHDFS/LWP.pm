@@ -4,10 +4,11 @@ use strict;
 use warnings;
 use parent 'Net::Hadoop::WebHDFS';
 
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 
 use LWP::UserAgent;
 use Carp;
+use Scalar::Util 'openhandle';
 
 sub new {
     my $class   = shift;
@@ -50,7 +51,22 @@ sub request {
     print "URI : $uri\n" if $self->{debug};
 
     my $req = HTTP::Request->new( $method => $uri );
-    $req->content($payload) if $payload;
+
+    # TODO refer to http://www.perlmonks.org/?node_id=761560 when uploading large files becomes a problem
+    if (length $payload) {
+        if ( openhandle($payload) ) {
+            $req->content(
+                do { local $/; <$payload> }
+            );
+        }
+        elsif ( ref $payload ) {
+            croak __PACKAGE__ . " does not accept refs as content, only scalars and FH";
+        }
+        else {
+            $req->content($payload);
+        }
+    }
+
     while ( my ( $h_field, $h_value ) = splice( $header || [], 0, 2 ) ) {
         $req->header( $h_field => $h_value );
     }
@@ -79,7 +95,7 @@ sub request {
 
     # this error happens for secure clusters when using Net::Hadoop::WebHDFS,
     # but LWP::Authen::Negotiate takes care of it transparently in this module.
-    # we still may get this error on a secure cluster, when the credentials 
+    # we still may get this error on a secure cluster, when the credentials
     # cache hasn't been initialized
     elsif ( $code == 401 ) {
         my $extramsg = ( $headers->{'www-authenticate'} || '' ) eq 'Negotiate'
@@ -135,12 +151,12 @@ Net::Hadoop::WebHDFS::LWP - Client library for Hadoop WebHDFS and HttpFs, with K
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
     use Net::Hadoop::WebHDFS::LWP;
-    
+
     my $client = Net::Hadoop::WebHDFS::LWP->new(
         host        => 'webhdfs.local',
         port        => 14000,

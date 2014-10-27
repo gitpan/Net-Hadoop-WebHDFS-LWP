@@ -24,6 +24,7 @@ my %WriteMakefileArgs = (
     "Data::Dumper" => 0,
     "LWP::UserAgent" => 0,
     "Net::Hadoop::WebHDFS" => 0,
+    "Scalar::Util" => 0,
     "parent" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -37,7 +38,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "libwww" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -53,6 +54,7 @@ my %FallbackPrereqs = (
   "HTTP::Message" => 0,
   "LWP::UserAgent" => 0,
   "Net::Hadoop::WebHDFS" => 0,
+  "Scalar::Util" => 0,
   "Test::Deep" => 0,
   "Test::More" => 0,
   "libwww" => 0,
